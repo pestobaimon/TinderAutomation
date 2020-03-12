@@ -3,26 +3,29 @@ import matplotlib.pyplot as plt
 import pynder
 from helpers import get_access_token, get_login_credentials
 from io_helper import save_image
+from image_viewer import ImageViewer
 
 email, password, FBID = get_login_credentials()
-FBTOKEN = get_access_token(email, password)
-session = pynder.Session(facebook_token=FBTOKEN)
+session = pynder.Session(XAuthToken='d4d5bfc1-63e8-4a2b-bcd1-d456bf147781')
 
 while True:
     users = session.nearby_users()
     for user in users:
         photos = user.get_photos()
         print("Fetched user photos..")
-        for photo in photos:
-            print(photo)
-            image = imread(photo)
-            imshow(image)
-            show()
 
-            input_string = "Write 1 to like. Write 2 to dislike."
-            ans = str(input(input_string)).lower()
+        imgviewer = ImageViewer(photos)
+        imgviewer.display_images()
 
-            if ans == "1":
-                save_image(image, photo, True)
-            else:
-                save_image(image, photo, False)
+        # for photo in photos:
+        #     print(photo)
+        #     image = imread(photo)
+        #     print('here')
+        #     imshow(image)
+        #     print('here2')
+        #     show()
+        #     print('here3')
+
+        #     input_string = "Press J to like. Press K to dislike."
+
+        #     save_image(image, photo, imgviewer.wait())
