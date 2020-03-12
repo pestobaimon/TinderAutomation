@@ -4,9 +4,10 @@ import pynder
 from helpers import get_access_token, get_login_credentials
 from io_helper import save_image
 from image_viewer import ImageViewer
+from authtoken import XAUTH
 
 email, password, FBID = get_login_credentials()
-session = pynder.Session(XAuthToken='d4d5bfc1-63e8-4a2b-bcd1-d456bf147781')
+session = pynder.Session(XAuthToken=XAUTH)
 
 while True:
     users = session.nearby_users()
